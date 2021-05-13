@@ -3,7 +3,7 @@ Type: Package
 Title: Modeling intraindividual variability indicators as predictors
         with longitudinal data
 Version: 0.1.0
-Author: Xiao Liu and Lijuan Wang
+Author: Lijuan Wang, Xiao Liu and Miao Yang
 Maintainer: Xiao Liu <xliu19@nd.edu>
 Description: Time parceling method and Bayesian variability modeling methods for modeling intraindividual variability indicators as predictors.  
 License: GPL-2

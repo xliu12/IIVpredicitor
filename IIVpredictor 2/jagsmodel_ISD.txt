@@ -1,0 +1,44 @@
+
+model {
+
+            for(i in 1:N){
+            for(j in 1:J){
+            #x_it = mu_i + v_it + e_it
+            X[i,j] ~ dnorm(mux[i],taux[i])
+            }
+            mux[i] ~ dnorm(mu_mux,tau_mux)
+
+            sigmasq_v[i] ~ dgamma(shape_v,rate_v)
+            sigma_v[i] <- sqrt(sigmasq_v[i])
+            # sigma_v[i] ~ dgamma(shape_v,rate_v)
+            # sigmasq_v[i] <- pow(sigma_v[i],2)
+            taux[i] <- 1/(sigmasq_v[i]+sigmasq_e)
+
+            y[i] ~ dnorm(muy[i],tauy)
+            muy[i] <- beta0+beta1*mux[i]+beta2*sigma_v[i]
+            }
+            mu_mux ~ dnorm(0,1e-6)
+            #tau_mux ~ dt(0, pow(100,-2), 1) T(0,)
+            #sigmasq_mux <- 1/tau_mux
+            #sigmasq_mux ~ dt(0, pow(100,-2), 1) T(0,)
+            #tau_mux <- 1/sigmasq_mux
+            sigma_mux ~ dt(0, pow(100,-2), 1) T(0,)
+            sigmasq_mux <- sigma_mux^2
+            tau_mux <- 1/sigmasq_mux
+
+            shape_v ~ dt(0, pow(100,-2), 1) T(0,)
+            #scale_v ~ dt(0, pow(100,-2), 1) T(0,)
+            #rate_v <- 1/scale_v
+            rate_v ~ dt(0, pow(100,-2), 1) T(0,)
+            scale_v <- 1/rate_v
+
+            sigmasq_e <- (1-ReMeasure)/ReMeasure * (1/tau_mux+shape_v/rate_v)
+
+            beta0 ~ dnorm(0,1e-6)
+            beta1 ~ dnorm(0,1e-6)
+            beta2 ~ dnorm(0,1e-6)
+            sigma_y ~ dt(0, pow(100,-2), 1) T(0,)
+            sigmasq_y <- sigma_y^2
+            tauy <- 1/sigmasq_y
+           }
+        

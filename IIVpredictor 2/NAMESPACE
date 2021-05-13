@@ -1,0 +1,5 @@
+exportPattern("^[[:alpha:]]+")
+import("lavaan")
+import("R2jags")
+importFrom("utils", "globalVariables")
+importFrom("stats", "quantile", "sd", "var")

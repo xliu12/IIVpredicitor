@@ -17,4 +17,4 @@ Config/testthat/edition: 2
 Reference: <https://github.com/xliu12/IIVpredicitor>
 Depends: R (>= 2.10)
 NeedsCompilation: no
-Packaged: 2021-05-13 21:55:53 UTC; xliu19
+Packaged: 2021-05-13 22:38:23 UTC; xliu19

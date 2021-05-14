@@ -1,7 +1,6 @@
 Package: IIVpredictor
 Type: Package
-Title: Modeling intraindividual variability indicators as predictors
-        with longitudinal data
+Title: Modeling Intraindividual Variability as Predictor
 Version: 0.1.0
 Author: Lijuan Wang, Xiao Liu and Miao Yang
 Maintainer: Xiao Liu <xliu19@nd.edu>
@@ -17,4 +16,4 @@ Config/testthat/edition: 2
 Reference: <https://github.com/xliu12/IIVpredicitor>
 Depends: R (>= 2.10)
 NeedsCompilation: no
-Packaged: 2021-05-13 22:38:23 UTC; xliu19
+Packaged: 2021-05-14 14:24:04 UTC; xliu19

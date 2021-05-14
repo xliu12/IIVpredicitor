@@ -10,11 +10,11 @@ IVAR.BV = function(
   , nchains=2, niter=8000
 ){
 
-  compxl=matrix(c(t(compx)),ncol = 1)
-  yl=matrix(rep(y,each=T),ncol = 1)
-  IDl=matrix(rep(1:N,each=T),ncol = 1)
-  datal=cbind(yl,compxl,IDl)
-  colnames(datal)=c("Y","X","ID")
+  # compxl=matrix(c(t(compx)),ncol = 1)
+  # yl=matrix(rep(y,each=T),ncol = 1)
+  # IDl=matrix(rep(1:N,each=T),ncol = 1)
+  # datal=cbind(yl,compxl,IDl)
+  # colnames(datal)=c("Y","X","ID")
 
   # jags data
   jagsdat=list(
@@ -26,6 +26,7 @@ IVAR.BV = function(
   )
 
   # jags model
+  file_jagsmodel_ISD2=file.path(tempdir(),"jagsmodel_ISD2.txt")
   write("
 model {
 
@@ -64,12 +65,15 @@ model {
             tauy <- 1/sigmasq_y
 
             }
-        ","jagsmodel_ISD2.txt")
+        ",
+        file = file_jagsmodel_ISD2
+        # "jagsmodel_ISD2.txt"
+        )
   # run jags
   jagsout=jags(data = jagsdat
                , parameters.to.save = c( "beta1", "beta2","beta0", "shape_v", "scale_v", "sigmasq_y", "sigmasq_mux")
                # , inits = inits_tr
-               ,model.file = "jagsmodel_ISD2.txt",n.chains = nchains,
+               ,model.file = file_jagsmodel_ISD2,n.chains = nchains,
                n.iter = niter)
   jagsres=jagsout$BUGSoutput$summary
 

@@ -1,6 +1,6 @@
 ---
 title: "IIVpredictor-vignette"
-author: "Xiao Liu and Lijuan Wang"
+author: "Lijuan Wang, Xiao Liu and Miao Yang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

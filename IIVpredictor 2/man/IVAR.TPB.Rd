@@ -71,13 +71,13 @@ T=c(6,9,12)[2]
 
 #  Data Generation
 set.seed(12)
-mu< rnorm(N,0,sigma_mu)
-IIV< rgamma(N,shape=shape,scale=scale) #sigmasq_vi
-isd< sqrt(IIV)
+mu=rnorm(N,0,sigma_mu)
+IIV=rgamma(N,shape=shape,scale=scale) #sigmasq_vi
+isd=sqrt(IIV)
 # population regression model
-# y< 0+beta_mu*mu+beta_IIV*IIV+rnorm(N,0,sigma_ep)
+# y=0+beta_mu*mu+beta_IIV*IIV+rnorm(N,0,sigma_ep)
 # use ISD as predictor
-y< 0+beta_mu*mu+beta_IIV*isd+rnorm(N,0,sigma_ep)
+y=0+beta_mu*mu+beta_IIV*isd+rnorm(N,0,sigma_ep)
 
 x=v=compx=array(0,c(N,T))
 for (i in 1:N) {
@@ -89,7 +89,7 @@ for (i in 1:N) {
 IVAR.TPB(
   compx,
   y,
-  nB=1000
+  nB=10
 )
 
 %}

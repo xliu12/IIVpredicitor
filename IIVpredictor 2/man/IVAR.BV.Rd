@@ -70,15 +70,16 @@ beta_IIV=c(0,0.3,0.8,1.50)[2]
 N=c(200,500)[1]
 T=c(6,9,12)[2]
 
+
 #  Data Generation
 set.seed(12)
-mu< rnorm(N,0,sigma_mu)
-IIV< rgamma(N,shape=shape,scale=scale) #sigmasq_vi
-isd< sqrt(IIV)
+mu=rnorm(N,0,sigma_mu)
+IIV=rgamma(N,shape=shape,scale=scale) #sigmasq_vi
+isd=sqrt(IIV)
 # population regression model
-# y< 0+beta_mu*mu+beta_IIV*IIV+rnorm(N,0,sigma_ep)
+# y=0+beta_mu*mu+beta_IIV*IIV+rnorm(N,0,sigma_ep)
 # use ISD as predictor
-y< 0+beta_mu*mu+beta_IIV*isd+rnorm(N,0,sigma_ep)
+y=0+beta_mu*mu+beta_IIV*isd+rnorm(N,0,sigma_ep)
 
 x=v=compx=array(0,c(N,T))
 for (i in 1:N) {
@@ -92,7 +93,7 @@ IVAR.BV(
   compx,
   y,
   ReMeasure=0.88
-  , nchains=2, niter=8000
+  , nchains=2, niter=10
 )
 
 %}

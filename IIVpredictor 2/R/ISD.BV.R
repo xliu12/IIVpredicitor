@@ -9,12 +9,12 @@ ISD.BV = function (
   , nchains=2, niter=8000
   ){
 
-  # wide to long
-  compxl=matrix(c(t(compx)),ncol = 1)
-  yl=matrix(rep(y,each=T),ncol = 1)
-  IDl=matrix(rep(1:N,each=T),ncol = 1)
-  datal=cbind(yl,compxl,IDl)
-  colnames(datal)=c("Y","X","ID")
+  # # wide to long
+  # compxl=matrix(c(t(compx)),ncol = 1)
+  # yl=matrix(rep(y,each=T),ncol = 1)
+  # IDl=matrix(rep(1:N,each=T),ncol = 1)
+  # datal=cbind(yl,compxl,IDl)
+  # colnames(datal)=c("Y","X","ID")
 
   # jags data
   jagsdat=list(
@@ -26,6 +26,7 @@ ISD.BV = function (
   )
 
   # jags model
+  file_jagsmodel_ISD=file.path(tempdir(),"jagsmodel_ISD.txt")
   write("
 model {
 
@@ -69,13 +70,16 @@ model {
             sigmasq_y <- sigma_y^2
             tauy <- 1/sigmasq_y
            }
-        ", "jagsmodel_ISD.txt")
+        ",
+        file = file_jagsmodel_ISD
+        # "jagsmodel_ISD.txt"
+        )
 
   # run jags
   jagsout=jags(data = jagsdat
                , parameters.to.save = c("beta1", "beta2", "beta0", "shape_v", "scale_v", "sigmasq_y", "sigmasq_mux")
                # , inits = inits_tr
-               ,model.file = "jagsmodel_ISD.txt"
+               ,model.file = file_jagsmodel_ISD
                # ,n.chains = 2,n.iter = 60000
                ,n.chains = nchains,n.iter = niter
                )
